@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STOCKR — Manager Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/stockerDashboard.css">
+    <base target="_blank">
+</head>
+<body>
+
+<div class="noise"></div>
+<div id="cursor"></div>
+<div id="cursor-trail"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- ── SIDEBAR ── -->
+<aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <div class="logo-wrap">
+            <a href="#" class="logo">STOCKR<span class="logo-dot">.</span></a>
+        </div>
+        <button class="menu-toggle" id="menu-toggle">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/>
+            </svg>
+        </button>
+    </div>
+    <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-target="tab-product">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+            <span>Products</span>
+        </a>
+        <a href="#" class="nav-item" data-target="tab-stock">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"/></svg>
+            <span>Stock</span>
+        </a>
+        <a href="#" class="nav-item" data-target="tab-order">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <span>Orders</span>
+        </a>
+        <a href="#" class="nav-item" data-target="tab-supplier">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+            <span>Suppliers</span>
+        </a>
+        <a href="#" class="nav-item" data-target="tab-category">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+            <span>Categories</span>
+        </a>
+        <a href="#" class="nav-item" data-target="tab-report">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            <span>Reports</span>
+        </a>
+        <a href="#" class="nav-item" data-target="tab-feedback">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+            <span>Feedback</span>
+        </a>
+    </nav>
+    <div class="sidebar-footer">
+        <a href="profile.html" class="footer-btn">
+            <svg class="nav-icon" fill="none" stroke="var(--neon)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            <span>My Profile</span>
+        </a>
+        <button class="footer-btn logout-btn" onclick="logout()">
+            <svg class="nav-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            <span>Logout</span>
+        </button>
+    </div>
+</aside>
+
+<!-- ── MAIN ── -->
+<main class="main-content">
+    <div class="dashboard-header">
+        <div>
+            <h1 class="page-title" id="page-title">Products</h1>
+            <p class="page-sub" id="page-sub">// SYSTEM PRODUCT INVENTORY</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;">
+            <div class="current-user-tag" id="current-user-name">Loading...</div>
+        </div>
+    </div>
+
+    <!-- ══ TAB: PRODUCT ══ -->
+    <div class="tab-content active" id="tab-product">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-label">Total Products</div><div class="stat-value neon">0</div><div class="stat-sub">SKUs in catalogue</div></div>
+            <div class="stat-card"><div class="stat-label">In Stock</div><div class="stat-value acid">0</div><div class="stat-sub">Available</div></div>
+            <div class="stat-card"><div class="stat-label">Low Stock</div><div class="stat-value warn">0</div><div class="stat-sub">Reorder needed</div></div>
+            <div class="stat-card"><div class="stat-label">Out of Stock</div><div class="stat-value plasma">0</div><div class="stat-sub">Unavailable</div></div>
+        </div>
+        <div class="table-toolbar">
+            <div class="toolbar-left">
+                <div class="search-wrap">
+                    <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,.4)" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" placeholder="Search products..." oninput="filterTable('product-table-body',this.value)">
+                </div>
+            </div>
+            <button class="btn-add" onclick="openGenericModal('product')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Add Product
+            </button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>SKU</th><th>Product Name</th><th>Category</th><th>Unit Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="product-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ══ TAB: STOCK ══ -->
+    <div class="tab-content" id="tab-stock">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-label">Total Units</div><div class="stat-value neon">0</div><div class="stat-sub">Across all products</div></div>
+            <div class="stat-card"><div class="stat-label">SKU Count</div><div class="stat-value acid">0</div><div class="stat-sub">Unique products</div></div>
+            <div class="stat-card"><div class="stat-label">Low Stock</div><div class="stat-value warn">0</div><div class="stat-sub">Below threshold</div></div>
+            <div class="stat-card"><div class="stat-label">Out of Stock</div><div class="stat-value plasma">0</div><div class="stat-sub">Zero quantity</div></div>
+        </div>
+        <div class="table-toolbar">
+            <div class="toolbar-left">
+                <div class="search-wrap">
+                    <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,.4)" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" placeholder="Search stock..." oninput="filterTable('stock-table-body',this.value)">
+                </div>
+            </div>
+            <button class="btn-add" onclick="openGenericModal('stock')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Adjust Stock
+            </button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Product</th><th>SKU</th><th>Category</th><th>Quantity</th><th>Threshold</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="stock-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ══ TAB: ORDER (Purchase Orders) ══ -->
+    <div class="tab-content" id="tab-order">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-label">Total Orders</div><div class="stat-value neon">0</div><div class="stat-sub">All time</div></div>
+            <div class="stat-card"><div class="stat-label">Pending</div><div class="stat-value warn">0</div><div class="stat-sub">Awaiting approval</div></div>
+            <div class="stat-card"><div class="stat-label">Approved</div><div class="stat-value active">0</div><div class="stat-sub">In progress</div></div>
+            <div class="stat-card"><div class="stat-label">Received</div><div class="stat-value acid">0</div><div class="stat-sub">Completed</div></div>
+        </div>
+        <div class="table-toolbar">
+            <div class="toolbar-left">
+                <div class="search-wrap">
+                    <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,.4)" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" placeholder="Search orders..." oninput="filterTable('order-table-body',this.value)">
+                </div>
+            </div>
+            <button class="btn-add" onclick="openGenericModal('order')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                New Order
+            </button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>Order ID</th><th>Supplier</th><th>Ordered By</th><th>Order Date</th><th>Expected</th><th>Status</th><th>Notes</th><th>Actions</th></tr></thead>
+                <tbody id="order-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ══ TAB: SUPPLIER ══ -->
+    <div class="tab-content" id="tab-supplier">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-label">Total Suppliers</div><div class="stat-value neon" id="stat-sup-total">0</div><div class="stat-sub">Registered vendors</div></div>
+            <div class="stat-card"><div class="stat-label">Active</div><div class="stat-value acid" id="stat-sup-active">0</div><div class="stat-sub">Ongoing contracts</div></div>
+            <div class="stat-card"><div class="stat-label">Inactive</div><div class="stat-value plasma" id="stat-sup-inactive">0</div><div class="stat-sub">Contract ended</div></div>
+            <div class="stat-card"><div class="stat-label">Database</div><div class="stat-value warn">LIVE</div><div class="stat-sub">Connected to MySQL</div></div>
+        </div>
+        <div class="table-toolbar">
+            <div class="toolbar-left">
+                <div class="search-wrap">
+                    <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,.4)" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" placeholder="Search suppliers..." oninput="filterSuppliers(this.value)">
+                </div>
+            </div>
+            <button class="btn-add" onclick="openSupplierModal('add')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Add Supplier
+            </button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>ID</th><th>Company</th><th>Contact</th><th>Email</th><th>Phone</th><th>Status</th><th>Actions</th></tr></thead>
+                <tbody id="supplier-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ══ TAB: CATEGORY (flat list) ══ -->
+    <div class="tab-content" id="tab-category">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-label">Categories</div><div class="stat-value neon">0</div><div class="stat-sub">Total categories</div></div>
+            <div class="stat-card"><div class="stat-label">Avg Threshold</div><div class="stat-value acid">0</div><div class="stat-sub">Low stock alert level</div></div>
+            <div class="stat-card"><div class="stat-label">Configured</div><div class="stat-value neon">0</div><div class="stat-sub">With threshold set</div></div>
+            <div class="stat-card"><div class="stat-label">Using Default</div><div class="stat-value warn">0</div><div class="stat-sub">Default threshold (10)</div></div>
+        </div>
+        <div class="table-toolbar">
+            <div class="toolbar-left">
+                <div class="search-wrap">
+                    <svg width="14" height="14" fill="none" stroke="rgba(255,255,255,.4)" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+                    <input type="text" placeholder="Search categories..." oninput="filterTable('category-table-body',this.value)">
+                </div>
+            </div>
+            <button class="btn-add" onclick="openGenericModal('category')">
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                Add Category
+            </button>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>ID</th><th>Name</th><th>Description</th><th>Low Stock Threshold</th><th>Actions</th></tr></thead>
+                <tbody id="category-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ══ TAB: REPORT ══ -->
+    <div class="tab-content" id="tab-report">
+        <div class="chart-placeholder">
+            <div class="chart-header">
+                <div class="chart-title">Revenue Overview</div>
+                <div class="chart-period-btns">
+                    <button class="chart-period-btn active">7D</button>
+                    <button class="chart-period-btn">30D</button>
+                    <button class="chart-period-btn">90D</button>
+                </div>
+            </div>
+            <div class="mini-chart" id="revenue-chart"></div>
+        </div>
+        <div class="section-divider">
+            <div class="section-divider-line"></div>
+            <div class="section-divider-label">Available Reports</div>
+            <div class="section-divider-line"></div>
+        </div>
+        <div class="reports-grid">
+            <div class="report-card"><span class="report-tag live">Live</span><div class="report-card-icon neon-bg"><svg width="24" height="24" fill="none" stroke="var(--neon)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div><h3>Sales Report</h3><p>Complete breakdown of sales performance, revenue trends, and top-selling products.</p><button class="btn-report" onclick="showToast('Generating Sales Report...','success')"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>Export CSV</button></div>
+            <div class="report-card"><span class="report-tag live">Live</span><div class="report-card-icon acid-bg"><svg width="24" height="24" fill="none" stroke="var(--acid)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg></div><h3>Inventory Report</h3><p>Full inventory audit including stock levels, valuation, and reorder alerts.</p><button class="btn-report" onclick="showToast('Generating Inventory Report...','success')"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>Export CSV</button></div>
+            <div class="report-card"><span class="report-tag scheduled">Scheduled</span><div class="report-card-icon plasma-bg"><svg width="24" height="24" fill="none" stroke="var(--plasma)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div><h3>User Activity</h3><p>Track login history, role changes, and system actions per user account.</p><button class="btn-report" onclick="showToast('Generating User Activity Report...','success')"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>Export PDF</button></div>
+            <div class="report-card"><span class="report-tag live">Live</span><div class="report-card-icon warn-bg"><svg width="24" height="24" fill="none" stroke="var(--warn)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg></div><h3>Order Analytics</h3><p>Order fulfilment rates, delivery performance, and supplier purchase patterns.</p><button class="btn-report" onclick="showToast('Generating Order Analytics...','success')"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>Export CSV</button></div>
+            <div class="report-card"><span class="report-tag scheduled">Scheduled</span><div class="report-card-icon purple-bg"><svg width="24" height="24" fill="none" stroke="#b97aff" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg></div><h3>Supplier Report</h3><p>Vendor performance metrics, delivery times, and contract status overview.</p><button class="btn-report" onclick="showToast('Generating Supplier Report...','success')"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>Export PDF</button></div>
+            <div class="report-card"><span class="report-tag live">Live</span><div class="report-card-icon neon-bg"><svg width="24" height="24" fill="none" stroke="var(--neon)" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg></div><h3>Feedback Summary</h3><p>Aggregated ratings, sentiment trends, and key themes from submissions.</p><button class="btn-report" onclick="showToast('Generating Feedback Summary...','success')"><svg width="12" height="12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>Export CSV</button></div>
+        </div>
+    </div>
+
+    <!-- ══ TAB: FEEDBACK ══ -->
+    <div class="tab-content" id="tab-feedback">
+        <div class="stats-grid">
+            <div class="stat-card"><div class="stat-label">Total Feedback</div><div class="stat-value neon">0</div><div class="stat-sub">All submissions</div></div>
+            <div class="stat-card"><div class="stat-label">Avg. Rating</div><div class="stat-value acid">0.0 &#9733;</div><div class="stat-sub">Out of 5</div></div>
+            <div class="stat-card"><div class="stat-label">This Week</div><div class="stat-value neon">0</div><div class="stat-sub">New entries</div></div>
+            <div class="stat-card"><div class="stat-label">Bug Reports</div><div class="stat-value plasma">0</div><div class="stat-sub">Need attention</div></div>
+        </div>
+        <div class="feedback-grid">
+            <div class="feedback-card"><h3>Recent Feedback</h3><div id="feedback-list"></div></div>
+            <div class="feedback-card">
+                <h3>Submit Feedback</h3>
+                <div class="feedback-form">
+                    <div class="modal-field"><div class="modal-label">Your Rating</div>
+                        <div class="star-rating" id="star-rating">
+                            <button class="star-btn" data-val="1">&#9733;</button>
+                            <button class="star-btn" data-val="2">&#9733;</button>
+                            <button class="star-btn" data-val="3">&#9733;</button>
+                            <button class="star-btn" data-val="4">&#9733;</button>
+                            <button class="star-btn" data-val="5">&#9733;</button>
+                        </div>
+                        <div class="rating-label" id="rating-label">Select a rating</div>
+                    </div>
+                    <div class="modal-field"><label class="modal-label">Category</label>
+                        <select class="modal-select" id="feedback-category">
+                            <option value="">Select category...</option>
+                            <option>System Performance</option><option>UI / UX</option>
+                            <option>Feature Request</option><option>Bug Report</option><option>General</option>
+                        </select>
+                    </div>
+                    <div class="modal-field"><label class="modal-label">Message</label>
+                        <textarea class="modal-input" id="feedback-message" placeholder="Describe your experience..." style="min-height:100px;resize:vertical;"></textarea>
+                    </div>
+                    <button class="btn-add" onclick="submitFeedback()" style="width:100%;justify-content:center;margin-top:0.5rem;">
+                        <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                        Submit Feedback
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="table-wrap">
+            <table>
+                <thead><tr><th>ID</th><th>From</th><th>Category</th><th>Rating</th><th>Message</th><th>Date</th><th>Actions</th></tr></thead>
+                <tbody id="feedback-table-body"></tbody>
+            </table>
+        </div>
+    </div>
+</main>
+
+<!-- ── SUPPLIER MODAL ── -->
+<div class="modal-overlay" id="supplier-modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <div><h2 class="modal-title" id="s-modal-title">Add Supplier</h2><p class="modal-sub" id="s-modal-sub">// REGISTER A NEW SUPPLIER</p></div>
+            <button class="modal-close" onclick="closeSupplierModal()"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="modal-body">
+            <div class="modal-row">
+                <div class="modal-field"><label class="modal-label">Company Name *</label><input type="text" class="modal-input" id="s-modal-name" placeholder="e.g. TechSupply Co."></div>
+                <div class="modal-field"><label class="modal-label">Contact Person</label><input type="text" class="modal-input" id="s-modal-contact" placeholder="e.g. Kamal Perera"></div>
+            </div>
+            <div class="modal-row">
+                <div class="modal-field"><label class="modal-label">Email</label><input type="email" class="modal-input" id="s-modal-email" placeholder="supplier@company.lk"></div>
+                <div class="modal-field"><label class="modal-label">Phone</label><input type="tel" class="modal-input" id="s-modal-phone" placeholder="+94 71 123 4567"></div>
+            </div>
+            <div class="modal-field"><label class="modal-label">Address</label><textarea class="modal-input" id="s-modal-address" placeholder="Supplier address..." style="min-height:70px;resize:vertical;"></textarea></div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-modal-cancel" onclick="closeSupplierModal()">Cancel</button>
+            <button class="btn-modal-save" id="s-modal-save-btn" onclick="saveSupplier()"><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Save Supplier</button>
+        </div>
+    </div>
+</div>
+
+<!-- ── GENERIC MODAL ── -->
+<div class="modal-overlay" id="generic-modal-overlay">
+    <div class="modal">
+        <div class="modal-header">
+            <div><h2 class="modal-title" id="generic-modal-title">Add Item</h2><p class="modal-sub" id="generic-modal-sub">// FILL IN THE DETAILS</p></div>
+            <button class="modal-close" onclick="closeGenericModal()"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="modal-body" id="generic-modal-body"></div>
+        <div class="modal-footer">
+            <button class="btn-modal-cancel" onclick="closeGenericModal()">Cancel</button>
+            <button class="btn-modal-save" onclick="saveGeneric()"><svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Save</button>
+        </div>
+    </div>
+</div>
+
+<!-- ── CONFIRM MODAL ── -->
+<div class="modal-overlay" id="confirm-overlay">
+    <div class="modal confirm-dialog">
+        <div class="modal-header">
+            <div><h2 class="modal-title" style="-webkit-text-fill-color:var(--plasma);color:var(--plasma);">Confirm Delete</h2><p class="modal-sub">// THIS ACTION IS IRREVERSIBLE</p></div>
+            <button class="modal-close" onclick="document.getElementById('confirm-overlay').classList.remove('open')"><svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="confirm-warning" id="confirm-message">Are you sure you want to delete this record?</div>
+        <div class="modal-footer">
+            <button class="btn-modal-cancel" onclick="document.getElementById('confirm-overlay').classList.remove('open')">Cancel</button>
+            <button class="btn-confirm-delete" id="confirm-action-btn">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div id="toast"></div>
+<script src="../JS/stockerDashboard.js"></script>
+</body>
+</html>
